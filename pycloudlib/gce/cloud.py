@@ -112,7 +112,10 @@ class GCE(BaseCloud):
             cache_discovery=False,
             credentials=credentials,
         )
-        region = region or self.config.get("region") or "us-west2"
+
+        # If no region is specified, go for us-central1, as it is the 
+        # lowest priced region, and has low CO2 emmissions.
+        region = region or self.config.get("region") or "us-central1"
         zone = zone or self.config.get("zone") or "a"
         self.project = project
         self.region = region
